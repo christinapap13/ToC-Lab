@@ -10,8 +10,8 @@ Project name: NFA-to-DFA Converter
 Project description: An online application for NFA to DFA conversion. </br>
 Extension of the project: An online application for Regular Expression to NFA, DFA and Minimized-DFA
 
-##Creator (name in Greek with student ID)
-* <a href="https://github.com/christinapap13">ΧΡΙΣΤΙΝΑ ΠΑΠΑΣΤΑΥΡΟΥ</a>
+##Creator (name in Greek and English)
+* <a href="https://github.com/christinapap13">ΧΡΙΣΤΙΝΑ ΠΑΠΑΣΤΑΥΡΟΥ / CHRISTINA PAPASTAVROU</a>
 
 ## Project implementation duration
 May 2026
