@@ -1,22 +1,17 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/80216595/222827115-c2cc33d8-4353-409c-80a3-8453123e4dda.jpg">
+  <img width="1024" height="608" alt="n2dlogoRD" src="https://github.com/user-attachments/assets/0e349ac8-ead7-4d69-93b6-c2fa6b63aaf4" />
 </p>
 
-# N2D-NFA-to-DFA-Converter
-
-Diploma Thesis - CEID University of Patras.
+# NFA-to-DFA Converter
 
 ## Project details
-Project name: N2D-NFA-to-DFA-Converter
+Project name: NFA-to-DFA Converter
 
 Project description: An online application for NFA to DFA conversion.
+Extension of the project: An online application for Regular Expression to NFA, DFA and Minimized-DFA
 
 ##Creator (name in Greek with student ID)
-* <a href="https://github.com/christinapap13">ΧΡΙΣΤΙΝΑ ΠΑΠΑΣΤΑΥΡΟΥ, (Α.Μ. : 1059621)</a>
-
-
-## Demo Project Video
-👉 https://youtu.be/ixh79Hn8Zso
+* <a href="https://github.com/christinapap13">ΧΡΙΣΤΙΝΑ ΠΑΠΑΣΤΑΥΡΟΥ</a>
 
 ## Project implementation duration
-September 2022 - November 2022
+May 2026
