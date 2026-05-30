@@ -1,0 +1,738 @@
+/* ============================================================
+   GLOBAL RESET
+============================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   THEME VARIABLES
+============================================================ */
+:root {
+    --color-bg: #f5f7fb;
+    --color-panel: #ffffff;
+    --color-text: #222;
+    --color-subtext: #666;
+    --color-border: #d0d0d0;
+    --color-primary: #185ca1;
+    --color-primary-light: #1f74ce;
+    --color-success: #4CAF50;
+    --color-danger: #f44336;
+    --color-shadow: rgba(0,0,0,0.08);
+    --color-modal-bg: rgba(0,0,0,0.6);
+}
+
+/* ============================================================
+   BODY
+============================================================ */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 2px 6px var(--color-shadow);
+    position: relative; /* Σημαντικό για να ευθυγραμμιστεί σωστά το mobile μενού */
+}
+
+.app-nav {
+    display: flex;
+    align-items: center; /* Κεντράρει κάθετα τα κουμπιά/dropdown */
+    gap: 12px;
+    height: 100%; /* Διασφαλίζει κοινό πλαίσιο αναφοράς */
+}
+
+.header-left-side {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+}
+
+.app-nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* ============================================================
+   NAVBAR DROPDOWN & GITHUB STYLES
+============================================================ */
+
+/* Κοινό στυλ για το active κουμπί και το κουμπί του dropdown */
+.active-nav-btn, .dropdown-trigger-btn {
+    background-color: var(--color-primary);
+    color: white !important;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 38px; /* Κλειδώνουμε σταθερό ύψος για όλα */
+    box-sizing: border-box;
+}
+
+.dropdown-trigger-btn {
+    background-color: transparent;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dropdown-trigger-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Το container του Dropdown */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Το κρυφό μενού που εμφανίζεται */
+.nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-panel);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px var(--color-shadow);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+}
+
+/* Ή καλύτερη λύση αν συνεχίζει να κλείνει: */
+.nav-dropdown:hover .nav-dropdown-content {
+    display: block;
+}
+
+/* Προσθέτουμε ένα αόρατο pseudo-element πάνω από το μενού που γεμίζει το κενό */
+.nav-dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Εκτείνεται προς τα πάνω, κάτω από το κουμπί */
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: transparent; /* Αόρατο αλλά πιάνει το ποντίκι! */
+}
+
+/* Στυλ για τα links μέσα στο dropdown */
+.nav-dropdown-content a {
+    color: var(--color-text) !important;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+
+.nav-dropdown-content a:hover {
+    background-color: var(--color-bg);
+    color: var(--color-primary) !important;
+}
+
+/* Εμφάνιση του μενού με Hover */
+.nav-dropdown:hover .nav-dropdown-content {
+    display: block;
+}
+
+/* Μορφοποίηση για το GitHub Κουμπί */
+.github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #24292e; /* Το αυθεντικό χρώμα του GitHub */
+    color: white !important;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease;
+    height: 38px; /* Ίδιο ακριβώς ύψος με τα διπλανά κουμπιά */
+    box-sizing: border-box;
+}
+
+.github-btn:hover {
+    background-color: #555;
+}
+
+/* Μικρή διόρθωση για την ευθυγράμμιση της nav μπάρας */
+.app-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+============================================================ */
+.app-main {
+    display: flex;
+    height: calc(100vh - 80px);
+}
+
+/* ============================================================
+   PANELS
+============================================================ */
+.panel {
+    background-color: var(--color-panel);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.panel-left {
+    width: 40%;
+    padding: 10px;
+    margin: 1rem;
+}
+
+.left-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+}
+
+.panel-right {
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-box {
+    flex: 1;
+    background-color: var(--color-panel);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--color-shadow);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+/* ============================================================
+   FORM ELEMENTS
+============================================================ */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 50%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-panel);
+    color: var(--color-text);
+    font-size: 0.95rem;
+    transition: 0.25s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(56, 132, 255, 0.25);
+    outline: none;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: var(--color-subtext);
+}
+
+
+
+/* ============================================================
+   REGEX INPUT
+============================================================ */
+#regexInput {
+    width: 70%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-panel);
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+/* ============================================================
+   CONVERT BUTTON
+============================================================ */
+#convertRegex {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+#convertRegex:hover {
+    background: #1e4fcf;
+    transform: translateY(-2px);
+}
+
+#convertRegex:active {
+    background: #193fa8;
+    transform: translateY(0);
+}
+
+/* ============================================================
+    RESET BUTTON
+============================================================ */
+
+.btn-reset {
+    background-color: #f44336; /* Κόκκινο απαλό ή γκρι, ανάλογα το γούστο σου */
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-reset:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   DOWNLOAD MENU (REGEX PAGE VERSION)
+============================================================ */
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.box-header h3 {
+    margin: 0;
+}
+
+.download-wrapper {
+    position: relative;
+}
+
+#download-nfa,
+#download-current-dfa,
+#download-min-dfa {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;            
+    white-space: nowrap; 
+}
+
+#download-nfa:hover,
+#download-current-dfa:hover,
+#download-min-dfa:hover {
+    background: #f3f3f3;
+    border-color: #999;
+    transform: translateY(-2px);
+}
+
+.download-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 50;
+}
+
+.download-menu button {
+    width: 100%;
+    padding: 8px 12px;
+    background: white;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.download-menu button:hover {
+    background: #f3f3f3;
+}
+
+/* ============================================================
+   TAB BUTTONS
+============================================================ */
+.tab-buttons {
+    display: flex;
+    gap: 0;
+    background: #e5e7eb;
+    padding: 4px;
+    border-radius: 10px;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    padding: 8px 18px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: 0.25s ease;
+    color: #555;
+}
+
+.tab-btn.active {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+}
+
+.tab-btn:not(.active):hover {
+    background: #d1d5db;
+}
+
+#current-min-dfa, #current-dfa {
+    max-height: 200px;   /* ή ό,τι ύψος θέλεις */
+    overflow-y: hidden; /* αρχικά κρύβουμε την scroll bar */
+    padding-right: 10px; /* για να μην ακουμπάει η scroll bar στο γράφημα */
+}
+
+#current-min-dfa, #current-dfa  {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #e5e7eb;
+}
+
+/* ============================================================
+   GRAPH CONTAINERS
+============================================================ */
+.graph-container {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================================================
+    GRAPH INSTRUCTION
+============================================================ */
+
+.graph-instruction {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #6b7280;
+    font-style: italic;
+    padding: 8px 0;
+    border-top: 1px dashed #e5e7eb;
+    background-color: #fafafa;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-sizing: border-box;
+    z-index: 10; /* Διασφαλίζει ότι θα φαίνεται πάντα πάνω από το γράφημα αν συμπέσουν */
+}
+
+.graph-instruction i {
+    margin-right: 4px;
+    color: #3b82f6; /* Μπλε εικονίδιο πληροφορίας */
+}
+
+/* ============================================================
+   INFO TOOLTIP FOR REGEX SYNTAX
+============================================================ */
+.label-info-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Κενό ανάμεσα στο Enter regex και το εικονίδιο */
+    margin-bottom: 6px;
+}
+
+.label-info-wrapper label {
+    margin-bottom: 0; /* Ακυρώνουμε το default margin για σωστή ευθυγράμμιση */
+}
+
+.info-container {
+    position: relative;
+    display: inline-block;
+}
+
+.info-icon {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.info-icon:hover {
+    color: var(--color-primary-light);
+}
+
+/* Το σώμα του Tooltip */
+.info-tooltip {
+    display: none; /* Κρυφό από προεπιλογή */
+    position: absolute;
+    left: 28px;
+    top: -20px;
+    width: 320px;
+    background-color: #ffffff;
+    color: #333333;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--color-border);
+    z-index: 100;
+    pointer-events: none; /* Δεν εμποδίζει το ποντίκι */
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Εμφάνιση του Tooltip με Hover */
+.info-container:hover .info-tooltip {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Μορφοποίηση περιεχομένου Tooltip */
+.info-tooltip h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.info-tooltip hr {
+    margin: 0 0 10px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.info-tooltip ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-tooltip li {
+    font-size: 0.82rem;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+}
+
+.info-tooltip .symbol {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+    margin-right: 8px;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.tooltip-example {
+    margin-top: 10px;
+    background: #edf2f7;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: monospace;
+    text-align: center;
+    border-left: 3px solid var(--color-primary);
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+============================================================ */
+
+/* Για Tablets και μικρά Laptops (Κάτω από 1024px) */
+@media screen and (max-width: 1024px) {
+    .app-main {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .panel-left, .panel-right {
+        width: calc(100% - 2rem);
+        margin: 1rem;
+    }
+
+    .panel-right {
+        height: 600px;
+    }
+}
+
+/* Για Κινητά Τηλέφωνα (Κάτω από 768px) */
+@media screen and (max-width: 768px) {
+    
+    .app-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        width: 100%;
+        position: relative; /* Κρατάει το μενού ευθυγραμμισμένο */
+    }
+
+    /* Εμφανίζουμε το hamburger κουμπί δεξιά */
+    .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 1001;
+    }
+
+    /* Το mobile μενού (αρχικά κρυφό) */
+    header.app-header nav.app-nav {
+        display: none; /* Χρησιμοποιούμε βαρύ selector για να ελέγχεται σωστά */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: var(--color-primary);
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        gap: 10px;
+        z-index: 1000;
+    }
+
+    /* 🔥 ΕΔΩ ΕΙΝΑΙ Η ΔΙΟΡΘΩΣΗ: Εμφάνιση του μενού με αυξημένη προτεραιότητα */
+    header.app-header nav.app-nav.is-active {
+        display: flex !important;
+    }
+
+    /* Τα κουμπιά μέσα στο mobile μενού */
+    .dropdown-trigger-btn, .active-nav-btn, .github-btn {
+        width: 100%;
+        justify-content: center;
+        height: 42px;
+    }
+
+    .nav-dropdown {
+        width: 100%;
+    }
+    
+    /* Μετατροπή του dropdown sub-menu για mobile */
+    .nav-dropdown-content {
+        position: static !important;
+        width: 100%;
+        box-shadow: none;
+        background-color: var(--color-primary-light);
+    }
+
+    /* --- Διόρθωση των Tooltips για κινητά --- */
+    .info-tooltip {
+        left: 0 !important;
+        top: 40px !important;
+        width: 280px !important;
+        transform: translateX(0) !important;
+    }
+
+    /* --- Στοιχεία Φόρμας --- */
+    .box-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .tab-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tab-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+/* Για πολύ μικρές οθόνες (Κάτω από 480px) */
+@media screen and (max-width: 480px) {
+    .app-title {
+        font-size: 1.1rem;
+    }
+
+    #convertRegex, .btn-reset {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

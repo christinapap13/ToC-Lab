@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Regex → NFA Converter</title>
+
+        <link rel="stylesheet" href="regex.css">
+        <link rel="icon" type="image/x-icon" href="images/logo.ico" />
+
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body data-theme="light">
+
+
+        <header class="app-header">
+
+            <div class="header-left-side">
+                <div class="brand-logo">
+                    <a class="logo" href="#">
+                        <img src="images/logo.jpg" alt="N2D Converter" width="90" height="40">
+                    </a>
+                </div>
+                <div class="app-title">Regex → NFA</div>
+            </div>
+            <div class="app-nav">
+                <div class="nav-dropdown">
+                    <button class="dropdown-trigger-btn">
+                        Other Conversions <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="nav-dropdown-content">
+                        <a href="index.html">NFA → DFA</a>
+                    </div>
+                </div>
+
+                <a href="https://github.com/christinapap13/N2D-NFA-to-DFA-Converter" target="_blank" class="github-btn">
+                    <i class="fa fa-github" aria-hidden="true"></i> GitHub
+                </a>
+            </div>
+        </header>
+
+
+        <main class="app-main">
+
+            <!-- LEFT PANEL -->
+            <section class="panel panel-left">
+
+                <div class="left-section">
+                    <h3>Regular Expression</h3>
+
+                    <div class="form-group">
+                        <div class="label-info-wrapper">
+                            <label for="regexInput">Enter regex</label>
+                            <div class="info-container">
+                                <i class="fa fa-info-circle info-icon" aria-hidden="true"></i>
+                                <div class="info-tooltip">
+                                    <h4><i class="fa fa-book"></i> Supported Regex Syntax</h4>
+                                    <hr>
+                                    <ul>
+                                        <li><span class="symbol">a-z, A-Z, 0-9</span> Characters from the alphabet and digits</li>
+                                        <li><span class="symbol">*</span> Kleene Star (0 or more repetitions)</li>
+                                        <li><span class="symbol">|</span> Union / OR operator (e.g., a|b)</li>
+                                        <li><span class="symbol">( )</span> Parentheses for grouping expressions</li>
+                                    </ul>
+                                    <div class="tooltip-example"><strong>Example:</strong> (a|b)*aba</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; max-width: 70%;">
+                            <input id="regexInput" type="text" placeholder="e.g. (a|b)*aba" style="flex: 1;">
+                            <span id="regex-error" style="color: #f44336; font-weight: bold; font-size: 0.9rem; display: none; white-space: nowrap;">
+                                Required
+                            </span>
+                        </div>
+                    </div>
+
+                    <button id="convertRegex" type="button">Convert to NFA</button>
+                    <button id="resetApp" type="button" class="btn-reset">Reset</button>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL -->
+            <!-- RIGHT PANEL: VISUALIZATION -->
+            <section class="panel-right">
+
+                <!-- NFA -->
+                <div class="right-box">
+                    <div class="box-header">
+                        <h3>NFA</h3>
+
+                        <div class="download-wrapper">
+                            <button id="download-nfa" type="button" disabled>
+                                <i class="fa fa-download"></i> Download NFA
+                            </button>
+
+                            <div class="download-menu" id="menu-nfa">
+                                <button data-type="dot">Download .dot</button>
+                                <button data-type="jpg">Download .jpg</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="current-nfa" class="graph-container"></div>
+                    <div class="graph-instruction" id="nfa-instruction" style="display: none;">
+                        <i class="fa fa-info-circle"></i> Use mouse drag to move and scroll wheel to zoom in/out
+                    </div>
+                </div>
+
+
+
+                <!-- Toggle buttons -->
+                <!-- DFA + Min DFA BOX -->
+                <div class="right-box">
+
+                    <div class="box-header">
+
+                        <div class="tab-buttons">
+                            <button id="show-dfa" class="tab-btn active">DFA</button>
+                            <button id="show-min-dfa" class="tab-btn">Minimized DFA</button>
+                        </div>
+
+                        <div class="download-wrapper" id="dfa-download-wrapper">
+                            <button id="download-current-dfa" type="button" disabled>
+                                <i class="fa fa-download"></i> Download DFA
+                            </button>
+
+                            <div class="download-menu" id="menu-dfa">
+                                <button data-type="dot">Download .dot</button>
+                                <button data-type="jpg">Download .jpg</button>
+                            </div>
+                        </div>
+
+                        <div class="download-wrapper" id="min-dfa-download-wrapper" style="display: none;">
+                            <button id="download-min-dfa" type="button" disabled>
+                                <i class="fa fa-download"></i> Download Min DFA
+                            </button>
+
+                            <div class="download-menu" id="menu-min-dfa">
+                                <button data-type="dot">Download .dot</button>
+                                <button data-type="jpg">Download .jpg</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="dfa-container" class="dfa-box" style="display:block;">
+                        <div id="current-dfa" class="graph-container"></div>
+                    </div>
+
+                    <div id="min-dfa-container" class="dfa-box" style="display:none;">
+                        <div id="current-min-dfa" class="graph-container"></div>
+                    </div>
+
+                    <div class="graph-instruction" id="dfa-instruction" style="display: none;">
+                        <i class="fa fa-info-circle"></i> Use mouse drag to move and scroll wheel to zoom in/out
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+        <script
+            src="https://unpkg.com/viz.js@1.8.1/viz.js"
+            type="javascript/worker"
+        ></script>
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
+
+        <script src="regex.js"></script>
+
+
+    </body>
+</html>
