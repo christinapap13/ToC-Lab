@@ -7,7 +7,7 @@
 ## Project details
 Project name: NFA-to-DFA Converter
 
-Project description: An online application for NFA to DFA conversion.
+Project description: An online application for NFA to DFA conversion. </br>
 Extension of the project: An online application for Regular Expression to NFA, DFA and Minimized-DFA
 
 ##Creator (name in Greek with student ID)
